@@ -1,12 +1,13 @@
-import Dropdown from "react-bootstrap/Dropdown";
-import DropdownButton from "react-bootstrap/DropdownButton";
+import React, { useContext } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../context/AuthProvider";
 
 function AppBar() {
+  const { user } = useContext(AuthContext);
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
@@ -32,9 +33,18 @@ function AppBar() {
               </NavDropdown.Item>
             </NavDropdown>
           </Nav>
-          <Nav>
-            <Link to="/login">Login</Link>
-          </Nav>
+          {(user && <h4>{user.email}</h4>) || (
+            <>
+              <Nav>
+                <Link to="/login">Login</Link>
+              </Nav>
+              <Nav>
+                <Link to="/register" className="ms-3">
+                  Register
+                </Link>
+              </Nav>
+            </>
+          )}
         </Navbar.Collapse>
       </Container>
     </Navbar>
