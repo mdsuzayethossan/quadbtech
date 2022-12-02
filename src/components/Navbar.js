@@ -8,6 +8,7 @@ import { AuthContext } from "../context/AuthProvider";
 
 function AppBar() {
   const { user } = useContext(AuthContext);
+  console.log(user);
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
@@ -33,7 +34,7 @@ function AppBar() {
               </NavDropdown.Item>
             </NavDropdown>
           </Nav>
-          {(user && <h4>{user.email}</h4>) || (
+          {(user && <h4 className="text-white">{user?.email}</h4>) || (
             <>
               <Nav>
                 <Link to="/login">Login</Link>

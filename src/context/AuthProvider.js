@@ -24,23 +24,40 @@ const AuthProvider = ({ children }) => {
     setLoading(true);
     return signOut(auth);
   };
+
+  const listAllUsers = (nextPageToken) => {
+    // List batch of users, 1000 at a time.
+    getAuth()
+      .listUsers(1000, nextPageToken)
+      .then((listUsersResult) => {
+        listUsersResult.users.forEach((userRecord) => {
+          console.log("user", userRecord.toJSON());
+        });
+        if (listUsersResult.pageToken) {
+          // List next batch of users.
+          listAllUsers(listUsersResult.pageToken);
+        }
+      })
+      .catch((error) => {
+        console.log("Error listing users:", error);
+      });
+  };
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      setLoading(false);
+    });
+    return () => unsubscribe();
+  }, []);
   const AuthInfo = {
     loading,
     user,
     logOut,
     createUser,
     signIn,
+    listAllUsers,
     setLoading,
   };
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      if (currentUser === null || currentUser.emailVerified) {
-        setUser(currentUser);
-      }
-      setLoading(false);
-    });
-    return () => unsubscribe();
-  }, []);
   return (
     <AuthContext.Provider value={AuthInfo}>{children}</AuthContext.Provider>
   );
