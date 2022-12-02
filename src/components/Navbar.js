@@ -4,14 +4,17 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
+import { Link } from "react-router-dom";
 
 function AppBar() {
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
-        <Navbar.Brand href="#home" className="fw-bold">
-          Quadb Tech
-        </Navbar.Brand>
+        <Link to="/" className="text-decoration-none">
+          <Navbar.Brand href="#home" className="fw-bold">
+            Quadb Tech
+          </Navbar.Brand>
+        </Link>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
@@ -30,17 +33,7 @@ function AppBar() {
             </NavDropdown>
           </Nav>
           <Nav>
-            <DropdownButton
-              align="end"
-              title="Dropdown end"
-              id="dropdown-menu-align-end"
-            >
-              <Dropdown.Item eventKey="1">Action</Dropdown.Item>
-              <Dropdown.Item eventKey="2">Another action</Dropdown.Item>
-              <Dropdown.Item eventKey="3">Something else here</Dropdown.Item>
-              <Dropdown.Divider />
-              <Dropdown.Item eventKey="4">Separated link</Dropdown.Item>
-            </DropdownButton>
+            <Link to="/login">Login</Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

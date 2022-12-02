@@ -6,7 +6,6 @@ import InfoCotainer from "./InfoContainer";
 const Home = () => {
   return (
     <>
-      <AppBar></AppBar>
       <Container className="mt-5">
         <InfoCotainer></InfoCotainer>
       </Container>
