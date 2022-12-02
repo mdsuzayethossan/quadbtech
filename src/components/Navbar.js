@@ -8,7 +8,6 @@ import { AuthContext } from "../context/AuthProvider";
 
 function AppBar() {
   const { user } = useContext(AuthContext);
-  console.log(user);
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
